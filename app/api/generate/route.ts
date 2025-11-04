@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       provider: "wavespeed",
       model: "black-forest-labs/FLUX.1-dev",
       inputs: prompt,
-      parameters: { num_inference_steps: 1 },
+      parameters: { num_inference_steps: 5 },
     });
     console.log("image.................................................",image);
 
