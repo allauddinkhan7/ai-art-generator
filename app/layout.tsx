@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "AI Art Generator",
-  description: "Generate amazing AI art with text prompts",
+  description: "Generate amazing AI art with text promptss",
 };
 
 export default function RootLayout({
