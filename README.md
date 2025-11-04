@@ -3,7 +3,12 @@ AI Art Generator
 A small Next.js app that creates images from text using Hugging Face models.  
 You can type a prompt, pick a model, and instantly get AI-generated art.
 
- Features
+
+
+
+
+
+ ..........Features.................
 . Text-to-image generation  
 . Multiple model options  
 . Simple and clean UI  
@@ -15,7 +20,35 @@ Setup
 
 
 
-Notes on My Approach
+
+
+
+..............Get Hugging Face API Key...............
+
+Go to Hugging Face
+
+Sign up / log in.
+
+Click your profile → Settings → Access Tokens.
+
+Click New token give a name and set role to Read.
+
+Copy the generated token (it will look like hf_xxx...).
+
+Paste it .env.local
+
+
+
+
+
+
+
+
+
+
+
+
+...............Notes on My Approach....................
 
 Finding a working AI image generation API was quite a challenge I tried Google Gemini, ChatGPT, DALL·E, and a few others.
 In the end, @huggingface/inference made my day with its simplicity and reliability.

@@ -68,14 +68,40 @@ export const fetchModels = createAsyncThunk<Model[]>(
 
 
 
+// export const generateImage = createAsyncThunk(
+//   "art/generateImage",
+//   async ({ prompt, model }: { prompt: string; model: string }) => {
+//     const response = await axios.post(`/api/generate`, { prompt, model });
+//     console.log("generateImage response:", response.data);
+//     return response.data.image; 
+//   }
+// );
+
+
 export const generateImage = createAsyncThunk(
   "art/generateImage",
-  async ({ prompt, model }: { prompt: string; model: string }) => {
-    const response = await axios.post(`/api/generate`, { prompt, model });
-    console.log("generateImage response:", response.data);
-    return response.data.image; 
+  async ({ prompt, model }: { prompt: string; model: string }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`/api/generate`, { prompt, model });
+      if (response.data.error) {
+        return rejectWithValue(response.data.error);
+      }
+      return response.data.image;
+    } catch (error: any) {
+      console.error("generateImage error:", error);
+      return rejectWithValue(error.response?.data?.error || "Server error while generating image");
+    }
   }
 );
+
+
+
+
+
+
+
+
+
 
 
 
@@ -115,7 +141,7 @@ const artSlice = createSlice({
       })
       .addCase(generateImage.rejected, (state, action) => {
         state.isLoadingImage = false;
-        state.error = action.error.message || "Failed to generate image";
+        state.error = action.payload as string;
       })
       .addCase(fetchModels.rejected, (state, action) => {
         state.isLoadingModels = false;
